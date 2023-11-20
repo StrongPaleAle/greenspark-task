@@ -1,0 +1,38 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --white: hsla(0, 0%, 98%, 1);
+  --black: hsla(0, 0%, 13%, 1);
+  
+  --green: hsla(157, 33%, 35%, 1);
+  --beige: hsla(42, 47%, 90%, 1);
+  --blue: hsla(232, 51%, 36%, 1);
+
+  --white-full: hsla(0, 0%, 100%, 1);
+  --gray: hsla(0, 0%, 69%, 1);
+  --light-green: hsla(157, 17%, 73%, 1);
+
+}
+
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--green);
+  background: var(--white-full);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  font-family: 'Cabin', sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
