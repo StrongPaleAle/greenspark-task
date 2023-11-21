@@ -1,15 +1,19 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --white: hsla(0, 0%, 98%, 1);
-  --black: hsla(0, 0%, 13%, 1);
-  
-  --green: hsla(157, 33%, 35%, 1);
-  --beige: hsla(42, 47%, 90%, 1);
-  --blue: hsla(232, 51%, 36%, 1);
+  --color-white: hsla(0, 0%, 100%, 1);
+  --color-black: hsla(0, 0%, 13%, 1);
+  --color-green: hsla(157, 33%, 35%, 1);
+  --color-beige: hsla(42, 47%, 90%, 1);
+  --color-blue: hsla(232, 51%, 36%, 1);
 
-  --white-full: hsla(0, 0%, 100%, 1);
-  --gray: hsla(0, 0%, 69%, 1);
-  --light-green: hsla(157, 17%, 73%, 1);
+  --color-alabaster: hsla(0, 0%, 98%, 1);
+  --color-gray: hsla(0, 0%, 69%, 1);
+  --color-light-green: hsla(157, 17%, 73%, 1);
+
+  --card-width: 850px;
+  --card-padding: 36px;
+  --widget-width: 220px;
+
 
 }
 
@@ -25,8 +29,8 @@
 
 body {
   min-height: 100vh;
-  color: var(--green);
-  background: var(--white-full);
+  color: var(--color-green);
+  background: var(--color-white);
   transition:
     color 0.5s,
     background-color 0.5s;
@@ -35,4 +39,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+svg {
+  max-width: 100%;
+  shape-rendering: geometricPrecision;
 }

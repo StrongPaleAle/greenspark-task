@@ -2,14 +2,15 @@ import { defineStore } from "pinia";
 import axios from 'axios';
 import { useLocalStorage } from '@vueuse/core';
 
-interface Product {
+export const productColors = ["white", "black", "blue", "green", "beige"] as const
+export interface Product {
   id: number;
   type: "carbon"| "plastic bottles" | "trees";
   amount: number;
   action: "collects" | "plants" | "offsets";
   active: boolean;
   linked: boolean;
-  selectedColor: "white" | "black" | "blue" | "green" | "beige";
+  selectedColor: typeof productColors[number];
 }
 
 export const useProductStore = defineStore("ProductStore", {
