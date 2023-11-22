@@ -67,7 +67,7 @@ productStore.fetchProducts();
         &__list{
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 26px;
             justify-content: center;
             align-items: center;
         }

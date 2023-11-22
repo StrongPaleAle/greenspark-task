@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// import HelloWorld from './components/HelloWorld.vue'
-// import TheWelcome from './components/TheWelcome.vue'
+
 import ProductWidgetList from './components/ProductWidgetList.vue';
 </script>
 
@@ -11,7 +10,3 @@ import ProductWidgetList from './components/ProductWidgetList.vue';
     <ProductWidgetList />
   </main>
 </template>
-
-<style scoped>
-
-</style>

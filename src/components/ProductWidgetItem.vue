@@ -1,34 +1,55 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { type Product } from '@/stores/ProductStore';
-import IconGreensparkVue from '@/components/icons/IconGreenspark.vue';
-import IconLogo from '@/components/icons/IconLogo.vue';
+import { type Product, useProductStore, productColors } from '@/stores/ProductStore';
+import ProductWidgetBadge from '@/components/ProductWidgetBadge.vue';
+import AppCheckbox from '@/components/AppCheckbox.vue';
+import AppColorPicker from '@/components/AppColorPicker.vue';
+import ProductWidgetTooltip from '@/components/ProductWidgetTooltip.vue';
 
 const props = defineProps<{
-  product: Product;
-    
+  product: Product;  
 }>();
-const amountModifier = computed(() => {
-  return props.product.type === 'carbon' ? 'kgs of' : '';
+
+const productSettings = computed(() => {
+    const item = ProductStore.productSettings.find((item) => item.id === props.product.id);
+    return item ? item : props.product;
 });
+const colorOptions = [...productColors];
+const ProductStore = useProductStore();
 </script>
 
 <template>
-  <article class="product-widget__item" :data-color="product.selectedColor">
-    <header>
-        <span class="product-widget__icon">
-            <IconLogo />
-            <IconGreensparkVue />
-            <span class="sr-only">Greenspark</span>
-        </span>
-        <h4>
-            <small>This product {{ product.action }}</small>
-            {{ product.amount }}{{ amountModifier }} {{ product.type }}
-        </h4>
-      
-    </header>
+  <article class="product-widget__item" :data-color="productSettings.selectedColor">
+
+    <ProductWidgetBadge :product="product" />
+
     <div class="product-widget__options">
-        <p></p>
+        <AppCheckbox 
+            :name="`linked-${productSettings.id}`"
+            :modelValue="productSettings.linked"
+            :value="productSettings.linked"
+            @update:modelValue="ProductStore.updateSetting(productSettings.id, 'linked', $event )"
+        >
+            Link to Public Profile <ProductWidgetTooltip />
+        </AppCheckbox>
+        <AppColorPicker 
+            :data-selected-color="productSettings.selectedColor"
+            :name="`color-${productSettings.id}`"
+            :modelValue="productSettings.selectedColor"
+            :options="colorOptions"
+            @update:modelValue="ProductStore.updateSetting(productSettings.id, 'selectedColor', $event )"
+        >
+            Badge colour
+        </AppColorPicker>
+        <AppCheckbox 
+            :name="`active-${productSettings.id}`"
+            :modelValue="productSettings.active"
+            :value="productSettings.active"
+            :check-type="'toggle'"
+            @update:modelValue="ProductStore.updateSetting(productSettings.id, 'active', $event, true)"
+        >
+            Activate badge
+        </AppCheckbox>
     </div>
   </article>
 </template>
@@ -39,39 +60,19 @@ const amountModifier = computed(() => {
         
         width: var(--widget-width);
 
-        header{
+        
+    }
+    
+    &__options{
+        padding-top: 10px;
+        font-size: 0.825rem;
+        > *{
+            margin-bottom: 10px;
+            padding: 3px 0;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 6px;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.01);
-            background-color: var(--accent-color);
-            color: var(--contrast-color);
-            h4{
-                flex: 1 1 auto;
-                font-size: 1.1rem;
-                font-weight: 700;
-                margin: 0;
-                small{
-                    display: block;
-                    font-size: 0.75rem;
-                    font-weight: 400;
-                    margin-bottom: 4px;
-                    color: var(--contrast-color);
-                }
-            }
+            justify-content: space-between;
         }
-    }
-    &__icon{
-        text-align: center;
-        flex: 0 0 auto;
-        line-height: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
     }
 }
 
