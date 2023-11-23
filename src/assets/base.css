@@ -13,11 +13,7 @@
   --card-width: 850px;
   --card-padding: 36px;
   --widget-width: 220px;
-
-
 }
-
-
 
 *,
 *::before,
@@ -31,11 +27,8 @@ body {
   min-height: 100vh;
   color: var(--color-green);
   background: var(--color-white);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
   font-family: 'Cabin', sans-serif;
-  font-size: 15px;
+  font-size: 1rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
