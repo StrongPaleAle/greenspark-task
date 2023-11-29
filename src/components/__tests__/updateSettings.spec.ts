@@ -1,6 +1,7 @@
 import { test, expect } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useProductStore } from '@/stores/ProductStore'
+import axios from 'axios'
 
 test('addToSettings', () => {
   setActivePinia(createPinia())
@@ -30,4 +31,17 @@ test('updateSetting', () => {
     { id: 1, active: true, linked: true, selectedColor: 'blue' },
     { id: 2, active: false, linked: false, selectedColor: 'black' }
   ])
+})
+
+test('fetchProductStore', async () => {
+  setActivePinia(createPinia())
+
+  const productStore = useProductStore()
+
+  await productStore.fetchProducts()
+  const products = (await axios.get('https://api.mocki.io/v2/016d11e8/product-widgets')).data
+  expect(productStore.products).toEqual(
+    products
+  )
+
 })

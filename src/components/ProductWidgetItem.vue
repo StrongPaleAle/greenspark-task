@@ -26,6 +26,7 @@ const ProductStore = useProductStore()
         :name="`linked-${productSettings.id}`"
         :modelValue="productSettings.linked"
         :value="productSettings.linked"
+        :disabled="!productSettings.active"
         @update:modelValue="ProductStore.updateSetting(productSettings.id, 'linked', $event)"
       >
         Link to Public Profile <ProductWidgetTooltip />
@@ -35,6 +36,7 @@ const ProductStore = useProductStore()
         :name="`color-${productSettings.id}`"
         :modelValue="productSettings.selectedColor"
         :options="colorOptions"
+        :disabled="!productSettings.active"
         @update:modelValue="ProductStore.updateSetting(productSettings.id, 'selectedColor', $event)"
       >
         Badge colour

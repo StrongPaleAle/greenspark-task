@@ -4,7 +4,8 @@ import { computed } from 'vue'
 const props = defineProps({
   modelValue: { type: String },
   name: { type: String },
-  options: { type: Array<string> } // can be used with different colors arrays 
+  options: { type: Array<string> }, // can be used with different colors arrays 
+  disabled: { type: Boolean, default: false }
 })
 // dimply emit an event with the new value. This can be used everywhere.
 const emit = defineEmits(['update:modelValue'])
@@ -31,6 +32,7 @@ const model = computed({
             v-model="model"
             type="radio"
             :name="name"
+            :disabled="disabled"
             :value="color"
             :id="`${name}-${color}`"
           />
@@ -85,6 +87,10 @@ fieldset {
     }
     input:checked + .radio-group__radio-color {
       outline-color: var(--color-gray);
+    }
+    input[disabled] + .radio-group__radio-color {
+      cursor: not-allowed;
+      --hover-opacity: 1;
     }
     input:focus-visible + .radio-group__radio-color {
       opacity: var(--hover-opacity);

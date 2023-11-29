@@ -14,7 +14,8 @@ const props = defineProps({
       return ['check', 'toggle'].includes(value)
     },
     default: 'check'
-  } 
+  },
+  disabled: { type: Boolean, default: false } 
 })
 // dimply emit an event with the new value. This can be used everywhere.
 const emit = defineEmits(['update:modelValue'])
@@ -33,7 +34,14 @@ const model = computed({
     <span class="input__label">
       <slot></slot>
     </span>
-    <input :name="name" :id="name" type="checkbox" v-model="model" :value="value" />
+    <input 
+      :name="name" 
+      :id="name" 
+      type="checkbox" 
+      v-model="model" 
+      :value="value"
+      :disabled="disabled" 
+      />
     <span class="checkbox__check">
       <IconCheck v-if="checkType === 'check'" />
       <span v-else></span>
@@ -127,6 +135,10 @@ const model = computed({
         opacity: 1;
         scale: 1;
       }
+    }
+    input[disabled] + .checkbox__check{
+      cursor: not-allowed;
+      --hover-opacity: 0;
     }
   }
   &[data-type='toggle'] {
